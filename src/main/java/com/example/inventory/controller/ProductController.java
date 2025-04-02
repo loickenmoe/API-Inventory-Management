@@ -19,25 +19,25 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping
-    @Operation(summary = "Créer un produit")
+    @PostMapping("/create")
+    @Operation(summary = "Ajouter un produit")
     public ResponseEntity<Product> createProduct(@RequestBody ProductDto productDto) {
         return ResponseEntity.ok(productService.createProduct(productDto));
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @Operation(summary = "Lister tous les produits")
     public ResponseEntity<List<Product>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     @Operation(summary = "Mettre à jour un produit")
     public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
         return ResponseEntity.ok(productService.updateProduct(id, productDto));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     @Operation(summary = "Supprimer un produit")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @GetMapping("/low-stock")
-    @Operation(summary = "Obtenir les produits en stock bas")
+    @Operation(summary = "Obtenir les produits en stock bas (qtéEnStock < 5)")
     public ResponseEntity<List<Product>> getLowStockProducts() {
         return ResponseEntity.ok(productService.getLowStockProducts());
     }

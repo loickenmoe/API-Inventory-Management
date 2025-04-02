@@ -1,6 +1,8 @@
 package com.example.inventory.dto;
 
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +10,14 @@ import lombok.Setter;
 @Setter
 public class ProductDto {
     private Long id;
+
+    @NotBlank(message = "Le nom du produit ne peut pas être vide")
     private String name;
+
+    @Min(value = 1, message = "Le prix doit être supérieur à 0")
     private double price;
+
+    @Min(value = 1, message = "La quantité en stock doit être supérieure à 0")
     private int stockQuantity;
 
     // Getters et Setters
